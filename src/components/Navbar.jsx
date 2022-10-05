@@ -20,14 +20,14 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:block">
-        <Link to="/signin" className="p-4 hover:text-accent">
+        <Link to="/auth/signin" className="p-4 hover:text-accent">
           Sign in
         </Link>
         <Link
-          to="/signup"
+          to="/auth/signup"
           className="px-5 py-2 ml-2 shadow-lg bg-button text-btnText rounded-2xl hover:shadow-2xl"
         >
-          Sign in
+          Sign up
         </Link>
       </div>
 
@@ -60,13 +60,13 @@ const Navbar = () => {
 
         <div>
           <Link
-            to="/signin"
+            to="/auth/signin"
             className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl"
           >
             Sign in
           </Link>
           <Link
-            to="/signup"
+            to="/auth/signup"
             className="w-full p-3 my-2 shadow-xl bg-button text-btnText rounded-2xl"
           >
             Sign in
