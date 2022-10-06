@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
-// import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-// import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
-// import { db } from '../firebase';
-// import { UserAuth } from '../context/AuthContext';
-
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { UserAuth } from '../context/AuthContext';
+import { Icon } from '@iconify/react';
 const SavedCoin = () => {
   const [coins, setCoins] = useState([]);
+  const { user } = UserAuth();
 
-  //   const coinPath = doc(db, 'users', `${user?.email}`);
-  //   const deleteCoin = async (passedid) => {
-  //     try {
-  //       const result = coins.filter((item) => item.id !== passedid);
-  //       await updateDoc(coinPath, {
-  //         watchList: result,
-  //       });
-  //     } catch (e) {
-  //       console.log(e.message);
-  //     }
-  //   };
+  useEffect(() => {
+    onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
+      setCoins(doc.data()?.watchList);
+    });
+  }, [user?.email]);
+
+  const coinPath = doc(db, 'users', `${user?.email}`);
+  const deleteCoin = async (passedid) => {
+    try {
+      const result = coins.filter((item) => item.id !== passedid);
+      await updateDoc(coinPath, {
+        watchList: result,
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   return (
     <div>
@@ -38,8 +44,11 @@ const SavedCoin = () => {
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <tr className="h-[60px] overflow-hidden">
-                <td></td>
+              <tr key={coin.id} className="h-[60px] overflow-hidden">
+                <td>
+                  {' '}
+                  <td>{coin?.rank}</td>
+                </td>
                 <td>
                   <Link to={`/coin/${coin.id}`}>
                     <div className="flex items-center">
@@ -53,12 +62,15 @@ const SavedCoin = () => {
                     </div>
                   </Link>
                 </td>
-                {/* <td className="pl-8">
-                  <AiOutlineClose
+
+                <td className="pl-8 ">
+                  <span
                     onClick={() => deleteCoin(coin.id)}
                     className="cursor-pointer"
-                  />
-                </td> */}
+                  >
+                    <Icon icon="ic:round-cancel" />
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>

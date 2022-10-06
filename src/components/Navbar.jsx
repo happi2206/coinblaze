@@ -1,12 +1,24 @@
 import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ToggleTheme from './ToggleTheme';
-
+import { UserAuth } from '../context/AuthContext';
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+
+  const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
   const handleNav = () => {
     setNav(!nav);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -19,17 +31,26 @@ const Navbar = () => {
         <ToggleTheme />
       </div>
 
-      <div className="hidden md:block">
-        <Link to="/auth/signin" className="p-4 hover:text-accent">
-          Sign in
-        </Link>
-        <Link
-          to="/auth/signup"
-          className="px-5 py-2 ml-2 shadow-lg bg-button text-btnText rounded-2xl hover:shadow-2xl"
-        >
-          Sign up
-        </Link>
-      </div>
+      {user?.email ? (
+        <div>
+          <Link to="/account" className="p-4">
+            Account
+          </Link>
+          <button onClick={handleSignOut}>Sign out</button>
+        </div>
+      ) : (
+        <div className="hidden md:block">
+          <Link to="/auth/signin" className="p-4 hover:text-accent">
+            Sign In
+          </Link>
+          <Link
+            to="/auth/signup"
+            className="px-5 py-2 ml-2 shadow-lg bg-button text-btnText rounded-2xl hover:shadow-2xl"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
 
       <div onClick={handleNav} className="z-10 block cursor-pointer md:hidden">
         {nav ? (

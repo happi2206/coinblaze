@@ -7,12 +7,9 @@ import DOMPurify from 'dompurify';
 const CoinPage = () => {
   const [coin, setCoin] = useState({});
   const params = useParams();
-
-  console.log(params.id);
   const url = `/coins/${params.id}?localization=false&sparkline=true`;
 
   useEffect(() => {
-    console.log(url);
     axios.get(url).then((response) => {
       setCoin(response.data);
       console.log(response.data);

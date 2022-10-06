@@ -2,44 +2,41 @@ import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
-// import { UserAuth } from '../context/AuthContext';
-// import { db } from '../firebase';
-// import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { UserAuth } from '../context/AuthContext';
+import { db } from '../firebase';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
 const CoinRow = ({ coin }) => {
   const [savedCoin, setSavedCoin] = useState(false);
-  //   const { user } = UserAuth();
-
-  //   const coinPath = doc(db, 'users', `${user?.email}`);
-  //   const saveCoin = async () => {
-  //     if (user?.email) {
-  //       setSavedCoin(true);
-  //       await updateDoc(coinPath, {
-  //         watchList: arrayUnion({
-  //           id: coin.id,
-  //           name: coin.name,
-  //           image: coin.image,
-  //           rank: coin.market_cap_rank,
-  //           symbol: coin.symbol,
-  //         }),
-  //       });
-  //     } else {
-  //       alert('Please sign in to save a coin to your watch list');
-  //     }
-  //   };
+  const { user } = UserAuth();
+  const coinPath = doc(db, 'users', `${user?.email}`);
+  const saveCoin = async () => {
+    if (user?.email) {
+      setSavedCoin(true);
+      await updateDoc(coinPath, {
+        watchList: arrayUnion({
+          id: coin.id,
+          name: coin.name,
+          image: coin.image,
+          rank: coin.market_cap_rank,
+          symbol: coin.symbol,
+        }),
+      });
+    } else {
+      alert('Please sign in to save a coin to your watch list');
+    }
+  };
 
   return (
     <tr className="h-[80px] border-b overflow-hidden">
-      {/* <td onClick={saveCoin}>
+      <td onClick={saveCoin} className="cursor-pointer">
         {savedCoin ? (
           <Icon icon="ant-design:star-filled" />
         ) : (
           <Icon icon="ant-design:star-outlined" />
         )}
-      </td> */}
-      <td className="cursor-pointer">
-        <Icon icon="ant-design:star-outlined" />
       </td>
+
       <td>{coin.market_cap_rank}</td>
       <td>
         <Link to={`/coin/${coin.id}`}>
