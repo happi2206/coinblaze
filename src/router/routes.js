@@ -3,6 +3,7 @@ import SignUp from '../views/Auth/SignUp';
 import Home from '../views/Home';
 import Account from '../views/Account';
 import CoinPage from '../views/CoinPage';
+import Portfolio from '../views/Portfolio';
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/account',
     element: <Account />,
+  },
+  {
+    path: '/portfolio',
+    element: <Portfolio />,
   },
 ];
 

@@ -10,23 +10,16 @@ const ToggleTheme = () => {
   };
   return (
     <div className="p-2">
-      {theme === 'dark' ? (
-        <div
-          className="flex items-center space-x-3 cursor-pointer"
-          onClick={toggleTheme}
-        >
-          <span>Lightmode </span>
+      <div
+        className="flex items-center space-x-3 cursor-pointer"
+        onClick={toggleTheme}
+      >
+        {theme === 'dark' ? (
           <Icon icon="akar-icons:sun" />
-        </div>
-      ) : (
-        <div
-          className="flex items-center space-x-3 cursor-pointer"
-          onClick={toggleTheme}
-        >
-          <span> Darkmode</span>
+        ) : (
           <Icon icon="bi:moon-fill" />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

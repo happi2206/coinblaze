@@ -1,32 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
 :root {
   @apply bg-primary text-primary;
 }
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .container {
-  @apply border border-secondary rounded-2xl shadow-xl bg-primary px-2 max-w-[1140px] w-full mx-auto;
+  @apply w-full px-2 mx-auto rounded shadow-xl bg-primary;
 }
 
 .dark {
-  --color-bg-primary: #2d3748;
-  --color-bg-primary: #2d3748;
+  --color-bg-primary: #8dc547;
+  --color-bg-primary: #121212;
   --color-bg-secondary: #283141;
   --color-text-primary: #dbdbdb;
   --color-text-secondary: #e2e8f0;
-  --color-text-accent: #81e6d9;
+  --color-text-accent: #8dc547;
   --color-bg-input: #4a5361;
-  --color-bg-button: #81e6d9;
+  --color-bg-button: #9ecf63;
 }
 
 .light {
-  --color-bg-primary: #abb4b9;
+  --color-bg-primary: #e2ece2;
   --color-bg-secondary: #edf2f7;
-  --color-text-primary: #2d3748;
+  --color-text-primary: #121212;
   --color-text-secondary: #4a5568;
-  --color-text-accent: #2b6cb0;
+  --color-text-accent: #8dc547;
   --color-bg-input: #edf2f7;
-  --color-bg-button: #2b6cb0;
+  --color-bg-button: #8dc547;
 }
