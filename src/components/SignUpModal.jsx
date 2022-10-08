@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
-import { UserAuth } from '../../context/AuthContext';
-
-const Signup = () => {
+import { UserAuth } from '../../src/context/AuthContext';
+import ModalContainer from './ModalContainer';
+const Signup = ({ modalOpen, closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const navigate = useNavigate();
   const { signUp } = UserAuth();
 
@@ -21,7 +20,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <ModalContainer modalOpen={modalOpen} closeModal={closeModal}>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
         <h1 className="text-2xl font-bold">Sign Up</h1>
         <form onSubmit={handleSubmit}>
@@ -61,7 +60,7 @@ const Signup = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </ModalContainer>
   );
 };
 

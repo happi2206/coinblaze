@@ -8,10 +8,11 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
-  @apply w-full px-2 mx-auto rounded shadow-xl bg-primary;
+  @apply w-full px-2 mx-auto rounded bg-primary;
 }
 
 .dark {

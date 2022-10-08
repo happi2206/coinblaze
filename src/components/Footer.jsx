@@ -1,28 +1,48 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 // import ThemeToggle from './ThemeToggle';
-
+import { Link, useNavigate } from 'react-router-dom';
+import shego from '../../src/assets/images/shego.jpeg';
 const Footer = () => {
   return (
-    <div className="container pt-8 mt-8 text-primary">
+    <div className="container pt-8 mt-8 text-xs text-primary">
       <div className="grid md:grid-cols-2">
-        <div className="flex justify-evenly w-full md:max-w-[300px] uppercase">
-          <div>
-            <h2 className="font-bold">Support</h2>
-            <ul>
-              <li className="py-2 text-sm">Help Center</li>
-              <li className="py-2 text-sm">Contact Us</li>
-              <li className="py-2 text-sm">API Status</li>
-              <li className="py-2 text-sm">Documentation</li>
-            </ul>
+        <div className="flex w-full uppercase ">
+          <div className="md:w-72">
+            <Link to="/">
+              <div className="flex items-center space-x-3">
+                <img
+                  src={shego}
+                  alt="company logo of shego"
+                  className="object-cover w-12 rounded-[50%] h-12 border-2 border-accent"
+                />
+                <h1 className="text-lg font-semibold">CoinBlaze</h1>
+              </div>
+            </Link>
+            <p className="pt-3 text-xs">
+              CoinBlaze provides a fundamental analysis of the crypto market.
+              CoinBlaze tracks price, volume and market capitalisation.
+            </p>
           </div>
           <div>
-            <h2 className="font-bold">Info</h2>
-            <ul>
-              <li className="py-2 text-sm">About Us</li>
-              <li className="py-2 text-sm">Careers</li>
-              <li className="py-2 text-sm">Invest</li>
-              <li className="py-2 text-sm">Legal</li>
+            <h2 className="font-bold">Explore</h2>
+            <ul className="pt-3">
+              <li className="py-1 ">
+                <Link to="/coin/bitcoin">Bitcoin Price</Link>
+              </li>
+              <li className="py-1 ">
+                <Link to="/coin/ethereum">Ethereum Price</Link>
+              </li>
+              <li className="py-1 ">
+                <Link to="/coin/binancecoin">BNB Price</Link>
+                NFTs
+              </li>
+              <li className="py-1 ">
+                <Link to="/nft"> NFTs</Link>
+              </li>
+              <li className="py-1 ">
+                <Link to="/trending"> Trending Coins</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -74,7 +94,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="py-4 text-center">Powered by Coin Gecko</p>
+      <p className="py-4 text-center">
+        built with 🫶🏾
+        <span className="font-semibold"> by happi </span> ✨
+      </p>
     </div>
   );
 };

@@ -12,15 +12,17 @@ const CoinView = () => {
   }, [getCoins]);
   const [searchText, setSearchText] = useState('');
   return (
-    <div className="">
+    <div className="pt-5">
       <div className="flex flex-col justify-between pt-4 pb-6 text-center md:flex-row md:text-right">
-        <h1 className="my-2 text-2xl font-bold">Search Crypto</h1>
+        <h1 className="my-2 text-xl font-bold">
+          Cryptocurrency Prices by Market Cap
+        </h1>
         <form>
           <input
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full px-4 py-2 border shadow-xl bg-primary border-input rounded-2xl"
+            className="w-full px-4 py-2 border shadow-xl placeholder:text-base bg-primary border-input rounded-2xl"
             type="text"
-            placeholder="Search a coin"
+            placeholder="Search crypto"
           />
         </form>
       </div>

@@ -1,63 +1,57 @@
 import React from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
-import Home from '../views/Home';
-import Portfolio from '../views/Portfolio';
-import NewCoins from '../views/NewCoins';
-import Account from '../views/Account';
-
+import { NavLink } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 const navLinkStyles = ({ isActive }) => {
   return {
-    borderBottom: isActive ? '2px solid #000' : 'none',
-    fontWeight: isActive ? '600' : '',
+    boxShadow: isActive && 'inset  0 -4px 2px -2px #8dc547',
+    color: isActive && '#fff',
   };
 };
 const Tabs = () => {
   const tabs = [
     {
+      title: 'Portfolio',
+      path: 'portfolio',
+      isPortfolio: true,
+    },
+    {
       title: 'Coins',
-      content: <Home />,
       path: '/',
     },
     {
-      title: 'Portfolio',
-      content: <Portfolio />,
-      path: '/portfolio',
-    },
-    {
       title: 'New Coins',
-      content: <NewCoins />,
-      path: '/new-coins',
+      path: 'new-coins',
     },
     {
-      title: 'Account',
-      content: <Account />,
-      path: '/account',
+      title: 'Trending',
+      path: 'trending',
+    },
+    {
+      title: 'NFT',
+      path: 'nft',
     },
   ];
   return (
-    <div>
-      <div className="flex pt-5 space-x-8 overflow-x-auto text-sm lg:space-x-14 lg:text-base">
+    <div className="container">
+      <div className="flex pt-5 space-x-8 overflow-x-auto text-gray-800 dark:text-gray-400 lg:space-x-14 lg:text-base">
         {tabs.map((tab, i) => (
           <NavLink
             to={tab.path}
             end={true}
             style={navLinkStyles}
             key={i}
-            className="pb-1"
+            className="flex items-center pb-1 text-sm font-semibold"
           >
-            {tab.tabTitle}
+            {tab.isPortfolio && (
+              <span className="pr-2">
+                <Icon icon="twemoji:star" width={10} />
+              </span>
+            )}
+
+            {tab.title}
           </NavLink>
         ))}
       </div>
-      <Routes>
-        {tabs.map((tab, i) => (
-          <Route
-            path={tab.routepath ? tab.routepath : tab.path}
-            key={i}
-            element={tab.content}
-          />
-        ))}
-      </Routes>
     </div>
   );
 };

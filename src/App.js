@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
+import Tabs from './components/Tabs';
 import { ThemeProvider } from './context/ThemeContext';
 import routes from './router/routes';
 import NotFound from './views/NotFound';
@@ -12,10 +13,11 @@ import { setCoins } from '../src/features/coins/coinSlice';
 import { useSelector } from 'react-redux';
 import Footer from './components/Footer';
 import { AuthContextProvider } from './context/AuthContext';
+import { useLocation } from 'react-router-dom';
 function App() {
   const dispatch = useDispatch();
   const url = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`;
-
+  const location = useLocation();
   const getCoins = useSelector((state) => {
     return state.coins.coins;
   });
@@ -30,6 +32,9 @@ function App() {
     <ThemeProvider>
       <AuthContextProvider>
         <Navbar />
+
+        {location.pathname !== '/portfolio' && <Tabs />}
+
         <Routes>
           {routes.map((route, index) => {
             return (

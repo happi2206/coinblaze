@@ -71,7 +71,7 @@ const CoinRow = ({ coin }) => {
       </td>
       <td>
         <Sparklines data={coin.sparkline_in_7d.price}>
-          <SparklinesLine color="teal" />
+          <SparklinesLine color="#8dc547" />
         </Sparklines>
       </td>
     </tr>

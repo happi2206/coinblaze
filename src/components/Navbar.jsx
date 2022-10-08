@@ -48,20 +48,20 @@ const Navbar = () => {
               className="absolute rounded w-72 bg-primary"
               onMouseLeave={() => setCryptocurrencies(false)}
             >
-              <ul className="py-3 text-xs">
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+              <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   Trending Coins
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   New Cryptocurrencies
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   Global Charts
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   All Coins
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   By Market Cap
                 </li>
               </ul>
@@ -79,14 +79,14 @@ const Navbar = () => {
               className="absolute rounded w-72 bg-primary"
               onMouseLeave={() => setExchanges(false)}
             >
-              <ul className="py-3 text-xs">
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+              <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   Crypto Exhanges
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   Decentralized Exchanges
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   Derivatives
                 </li>
               </ul>
@@ -104,11 +104,11 @@ const Navbar = () => {
               className="absolute rounded w-72 bg-primary"
               onMouseLeave={() => setNfts(false)}
             >
-              <ul className="py-3 text-xs">
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+              <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   NFT Floor Price
                 </li>
-                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-gray-700 hover:text-accent">
+                <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
                   NFT Related Coins
                 </li>
               </ul>

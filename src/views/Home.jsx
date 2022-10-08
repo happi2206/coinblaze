@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="container">
       {/* <TrendingCoins /> */}
-      <Tabs />
+
       <CoinView />
     </div>
   );

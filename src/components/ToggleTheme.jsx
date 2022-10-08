@@ -11,7 +11,7 @@ const ToggleTheme = () => {
   return (
     <div className="p-2">
       <div
-        className="flex items-center space-x-3 cursor-pointer"
+        className="flex items-center space-x-3 cursor-pointer hover:text-accent"
         onClick={toggleTheme}
       >
         {theme === 'dark' ? (
