@@ -8,7 +8,7 @@ const Footer = () => {
     <div className="container pt-8 mt-8 text-xs text-primary">
       <div className="grid md:grid-cols-2">
         <div className="flex w-full uppercase ">
-          <div className="md:w-72">
+          <div className="md:w-96">
             <Link to="/">
               <div className="flex items-center space-x-3">
                 <img

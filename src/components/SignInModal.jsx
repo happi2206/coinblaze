@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Link, useNavigate } from 'react-router-dom';
-import { UserAuth } from '../../src/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 import ModalContainer from './ModalContainer';
-import SignInModal from './SignInModal';
 import Button from './Button';
 import Input from './Input';
-const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
+const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
 
   return (
     <ModalContainer modalOpen={modalOpen} closeModal={closeModal}>
-      <div className="max-w-[400px] mx-auto min-h-[600px] ">
+      <div className="w-full md:max-w-[400px] mx-auto h-screen md:h-auto md:min-h-[500px] py-12 md:py-0">
         <span
           onClick={() => {
             closeModal();
@@ -34,22 +33,9 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
           <Icon icon="iconoir:cancel" width={33} />
         </span>
         <h1 className="text-xl font-bold">
-          IT'S FREE! Track your favorite coin in a single list 🚀
+          Login to track your favorite coin in a single list 🚀
         </h1>
-        <p className="pt-2 text-xs text-gray-500">
-          By continuing, you agree to CoinBlaze Terms of Service.
-        </p>
 
-        <div className="py-5">
-          <Button authbtn outlineprimary onClick={() => console.log('object')}>
-            <span className="flex items-center justify-center">
-              <Icon icon="flat-color-icons:google" width={13} />
-              <span className="ml-3"> Continue with Google</span>
-            </span>
-          </Button>
-        </div>
-
-        <p className="text-center">or</p>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="my-4">
             <Input
@@ -74,15 +60,26 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
             </Button>
           </div>
         </form>
+
+        <p className="py-5 text-center">or</p>
+        <div className="pb-5">
+          <Button authbtn outlineprimary onClick={() => console.log('object')}>
+            <span className="flex items-center justify-center">
+              <Icon icon="flat-color-icons:google" width={13} />
+              <span className="ml-3"> Continue with Google</span>
+            </span>
+          </Button>
+        </div>
+
         <p className="pt-5 text-sm text-center">
-          Already have an account?
+          Don't have an account?
           <span
             className="pl-2 cursor-pointer text-accent"
             onClick={() => {
               closeOtherModal();
             }}
           >
-            Sign in
+            Sign up
           </span>
         </p>
       </div>
@@ -90,4 +87,4 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
   );
 };
 
-export default Signup;
+export default SignIn;

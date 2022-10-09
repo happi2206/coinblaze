@@ -7,15 +7,20 @@ const Button = ({
   children,
   type = 'button',
   rounded,
-  full,
+  authbtn,
   outlineprimary,
   isSubmitting,
+  full,
 }) => {
   return (
     <button
-      className={` cursor-pointer ${
-        outlineprimary ? 'bg-black border border-white' : ' bg-button'
-      }  rounded text-sm text-white hover:opacity-75 px-8 py-3  font-medium
+      className={` ${
+        authbtn && 'w-full bg-transparent border-black dark:border-white'
+      } cursor-pointer  ${
+        outlineprimary
+          ? 'bg-transparent border border-black dark:border-white'
+          : ' bg-button'
+      } rounded text-sm text-black dark:text-white hover:opacity-75 px-8 py-3  font-medium
        ${isSubmitting && 'cursor-not-allowed opacity-75'}`}
       disabled={isSubmitting}
       type={type}

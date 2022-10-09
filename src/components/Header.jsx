@@ -3,6 +3,7 @@ import Button from './Button';
 import SignUpModal from './SignUpModal';
 import SideImage from '../assets/images/mockuper.png';
 import { useState } from 'react';
+import SignInModal from './SignInModal';
 const Header = () => {
   const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const [signInModalOpen, setSignInModalOpen] = useState(false);
@@ -21,19 +22,35 @@ const Header = () => {
 
         <div className="space-x-4">
           <Button onClick={() => setSignUpModalOpen(true)}>Sign Up</Button>
-          <Button outlineprimary>Sign In</Button>
+          <Button outlineprimary onClick={() => setSignInModalOpen(true)}>
+            Sign In
+          </Button>
         </div>
 
         <p>Start your portfolio now!</p>
       </div>
 
-      <div className="hidden w-3/5 md:block">
+      <div className="justify-end hidden w-3/5 md:flex">
         <img className="object-contain" src={SideImage} alt="preview of app" />
       </div>
 
       <SignUpModal
         modalOpen={signUpModalOpen}
         closeModal={() => setSignUpModalOpen(false)}
+        closeOtherModal={() => {
+          setSignUpModalOpen(false);
+          setSignInModalOpen(true);
+        }}
+      />
+      <SignInModal
+        modalOpen={signInModalOpen}
+        closeModal={() => {
+          setSignInModalOpen(false);
+        }}
+        closeOtherModal={() => {
+          setSignInModalOpen(false);
+          setSignUpModalOpen(true);
+        }}
       />
     </header>
   );

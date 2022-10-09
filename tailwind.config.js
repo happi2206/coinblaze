@@ -3,6 +3,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        main: '#8dc547',
+      },
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',

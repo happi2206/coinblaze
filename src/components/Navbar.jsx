@@ -4,8 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import ToggleTheme from './ToggleTheme';
 import { UserAuth } from '../context/AuthContext';
 import shego from '../../src/assets/images/shego.jpeg';
+import SignUpModal from './SignUpModal';
+import SignInModal from './SignInModal';
+import Accordion from './Accordion';
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
   const [cryptocurrencies, setCryptocurrencies] = useState(false);
   const [exchanges, setExchanges] = useState(false);
   const [nfts, setNfts] = useState(false);
@@ -26,14 +31,21 @@ const Navbar = () => {
 
   return (
     <div className="container flex items-center justify-between h-20 ">
+      <div onClick={handleNav} className="z-10 block cursor-pointer md:hidden">
+        {nav ? (
+          <Icon icon="ant-design:close-outlined" />
+        ) : (
+          <Icon icon="heroicons-solid:menu-alt-2" width={20} />
+        )}
+      </div>
       <Link to="/">
         <div className="flex items-center space-x-3">
           <img
             src={shego}
             alt="company logo of shego"
-            className="object-cover w-12 rounded-[50%] h-12 border-2 border-accent"
+            className="object-cover sm:w-12 rounded-[50%] h-8 w-8 sm:h-12 border-2 border-accent"
           />
-          <h1 className="text-lg font-semibold">CoinBlaze</h1>
+          <h1 className="text-base font-semibold sm:text-lg">CoinBlaze</h1>
         </div>
       </Link>
       <div className="items-center justify-between hidden w-2/6 md:flex">
@@ -153,13 +165,6 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      <div onClick={handleNav} className="z-10 block cursor-pointer md:hidden">
-        {nav ? (
-          <Icon icon="ant-design:close-outlined" />
-        ) : (
-          <Icon icon="ant-design:menu-outlined" />
-        )}
-      </div>
 
       <div
         className={
@@ -168,33 +173,66 @@ const Navbar = () => {
             : 'fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-300'
         }
       >
-        <ul className="w-full p-4">
-          <li className="py-6 border-b">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="py-6 border-b">
-            <Link to="/account">Account</Link>
-          </li>
-          <li>
-            <ToggleTheme />
-          </li>
-        </ul>
-
-        <div>
-          <Link
-            to="/auth/signin"
-            className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl"
-          >
-            Sign in
-          </Link>
-          <Link
-            to="/auth/signup"
-            className="w-full p-3 my-2 shadow-xl bg-button text-btnText rounded-2xl"
-          >
-            Sign in
-          </Link>
+        <div className="w-full p-4 space-y-3">
+          <Accordion
+            title="Cryptocurrencies"
+            accordionContent={[
+              { title: 'Trending Coins', link: 'trending' },
+              { title: 'New Cryptocurrencies', link: 'new-coins' },
+              { title: 'Global Charts', link: 'global-charts' },
+              { title: 'All Coins', link: '/' },
+            ]}
+          />
+          <Accordion
+            title="Exchanges"
+            accordionContent={[
+              { title: 'Crypto Exchanges', link: 'exchanges' },
+              {
+                title: 'Decentralized Exchanges',
+                link: 'decentralized-exchanges',
+              },
+              { title: 'Deriviatives', link: 'deriviatives' },
+            ]}
+          />
+          <Accordion
+            title="NFT"
+            accordionContent={[
+              { title: 'NFT Floor Price', link: 'nft' },
+              { title: 'NFT Related Coins', link: 'nft' },
+            ]}
+          />
         </div>
       </div>
+
+      <div className="flex items-center space-x-3">
+        <div className="block md:hidden">
+          <ToggleTheme />
+        </div>
+        <div
+          className="block cursor-pointer md:hidden"
+          onClick={() => setSignInModalOpen(true)}
+        >
+          <Icon icon="mdi:account" width={22} />
+        </div>
+      </div>
+      <SignInModal
+        modalOpen={signInModalOpen}
+        closeModal={() => {
+          setSignInModalOpen(false);
+        }}
+        closeOtherModal={() => {
+          setSignInModalOpen(false);
+          setSignUpModalOpen(true);
+        }}
+      />
+      <SignUpModal
+        modalOpen={signUpModalOpen}
+        closeModal={() => setSignUpModalOpen(false)}
+        closeOtherModal={() => {
+          setSignUpModalOpen(false);
+          setSignInModalOpen(true);
+        }}
+      />
     </div>
   );
 };

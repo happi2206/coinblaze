@@ -5,9 +5,10 @@ import { Sparklines, SparklinesLine } from 'react-sparklines';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
-
+import SignInModal from './SignInModal';
 const CoinRow = ({ coin }) => {
   const [savedCoin, setSavedCoin] = useState(false);
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
   const { user } = UserAuth();
   const coinPath = doc(db, 'users', `${user?.email}`);
   const saveCoin = async () => {
@@ -23,7 +24,7 @@ const CoinRow = ({ coin }) => {
         }),
       });
     } else {
-      alert('Please sign in to save a coin to your watch list');
+      setSignInModalOpen(true);
     }
   };
 
@@ -74,6 +75,12 @@ const CoinRow = ({ coin }) => {
           <SparklinesLine color="#8dc547" />
         </Sparklines>
       </td>
+      <SignInModal
+        modalOpen={signInModalOpen}
+        closeModal={() => {
+          setSignInModalOpen(false);
+        }}
+      />
     </tr>
   );
 };
