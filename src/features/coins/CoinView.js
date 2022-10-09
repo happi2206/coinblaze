@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CoinRow from '../../components/CoinRow';
+import Input from '../../components/Input';
 const CoinView = () => {
   const [coins, setCoins] = useState([]);
   const getCoins = useSelector((state) => {
@@ -13,42 +14,42 @@ const CoinView = () => {
   const [searchText, setSearchText] = useState('');
   return (
     <div className="pt-5">
-      <div className="flex flex-col justify-between pt-4 pb-6 text-center md:flex-row md:text-right">
-        <h1 className="my-2 text-xl font-bold">
+      <div className="flex flex-col justify-between pt-4 pb-6 text-center sm:flex-row md:text-right">
+        <h1 className="my-2 text-sm font-bold md:text-lg">
           Cryptocurrency Prices by Market Cap
         </h1>
         <form>
-          <input
-            onChange={(e) => setSearchText(e.target.value)}
-            className="w-full px-4 py-2 border shadow-xl placeholder:text-base bg-primary border-input rounded-2xl"
-            type="text"
-            placeholder="Search crypto"
-          />
+          <div className="w-auto sm:min-w-[20rem]">
+            <Input
+              type="search"
+              placeholder="Search crypto"
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </div>
         </form>
       </div>
       <table className="w-full text-center border-collapse">
         <thead>
           <tr className="border-b">
             <th></th>
-            <th className="px-4">#</th>
-            <th className="text-left">Coin</th>
+            <th className="px-4 text-xs sm:text-sm">#</th>
+            <th className="text-xs text-left sm:text-sm">Coin</th>
             <th></th>
-            <th>Price</th>
-            <th>24h</th>
-            <th className="hidden md:table-cell">24h Volume</th>
-            <th className="hidden sm:table-cell">Mkt</th>
-            <th>Last 7 Days</th>
+            <th className="text-xs sm:text-sm">Price</th>
+            <th className="text-xs sm:text-sm">24h</th>
+            <th className="hidden text-xs sm:text-sm md:table-cell">
+              24h Volume
+            </th>
+
+            <th className="hidden text-xs sm:text-sm sm:table-cell">Mkt</th>
+            <th className="text-xs sm:text-sm">Last 7 Days</th>
           </tr>
         </thead>
         <tbody>
           {coins &&
             coins
               .filter((coin) => {
-                if (searchText === '') {
-                  return coin;
-                } else if (
-                  coin.name.toLowerCase().includes(searchText.toLowerCase())
-                )
+                if (coin.name.toLowerCase().includes(searchText.toLowerCase()))
                   return coin;
               })
               .map((coin, index) => <CoinRow coin={coin} key={index} />)}

@@ -38,7 +38,7 @@ const CoinRow = ({ coin }) => {
         )}
       </td>
 
-      <td>{coin.market_cap_rank}</td>
+      <td className="text-sm">{coin.market_cap_rank}</td>
       <td>
         <Link to={`/coin/${coin.id}`}>
           <div className="flex items-center">
@@ -51,26 +51,26 @@ const CoinRow = ({ coin }) => {
           </div>
         </Link>
       </td>
-      <td className="uppercase">{coin.symbol}</td>
-      <td>${coin.current_price.toLocaleString()}</td>
-      <td>
+      <td className="text-xs uppercase">{coin.symbol}</td>
+      <td className="text-sm">${coin.current_price.toLocaleString()}</td>
+      <td className="text-sm">
         {coin.price_change_percentage_24h > 0 ? (
-          <p className="text-green-600">
+          <p className="text-sm text-green-600">
             {coin.price_change_percentage_24h.toFixed(2)}%
           </p>
         ) : (
-          <p className="text-red-600">
+          <p className="text-sm text-red-600">
             {coin.price_change_percentage_24h.toFixed(2)}%
           </p>
         )}
       </td>
-      <td className="w-[180px] hidden md:table-cell">
+      <td className="w-[180px] hidden md:table-cell text-sm">
         ${coin.total_volume.toLocaleString()}
       </td>
-      <td className="w-[180px] hidden sm:table-cell">
+      <td className="w-[180px] hidden sm:table-cell text-sm">
         ${coin.market_cap.toLocaleString()}
       </td>
-      <td>
+      <td className="text-sm">
         <Sparklines data={coin.sparkline_in_7d.price}>
           <SparklinesLine color="#8dc547" />
         </Sparklines>

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../src/context/AuthContext';
 import ModalContainer from './ModalContainer';
-import SignInModal from './SignInModal';
 import Button from './Button';
 import Input from './Input';
 const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { signUp } = UserAuth();
+  const { signUp, googleSignIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +20,15 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
       console.log(e.message);
     }
   };
-
+  const signInWithGoogle = async () => {
+    try {
+      closeModal();
+      await googleSignIn();
+      navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return (
     <ModalContainer modalOpen={modalOpen} closeModal={closeModal}>
       <div className="max-w-[400px] mx-auto min-h-[600px] ">
@@ -41,7 +48,7 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
         </p>
 
         <div className="py-5">
-          <Button authbtn outlineprimary onClick={() => console.log('object')}>
+          <Button authbtn outlineprimary onClick={signInWithGoogle}>
             <span className="flex items-center justify-center">
               <Icon icon="flat-color-icons:google" width={13} />
               <span className="ml-3"> Continue with Google</span>

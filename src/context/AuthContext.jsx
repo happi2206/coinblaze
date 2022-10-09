@@ -5,6 +5,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  signInWithPopup,
 } from 'firebase/auth';
 
 import { doc, setDoc } from 'firebase/firestore';
@@ -27,6 +31,19 @@ export const AuthContextProvider = ({ children }) => {
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    const response = await signInWithPopup(auth, provider);
+    const email = response.user.email;
+    const data = doc(db, 'users', email);
+    return setDoc(
+      data,
+      {
+        watchList: [],
+      },
+      { merge: true }
+    );
+  };
   const logOut = () => {
     return signOut(auth);
   };
@@ -41,7 +58,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ signUp, signIn, logOut, user }}>
+    <UserContext.Provider
+      value={{ signUp, signIn, logOut, user, googleSignIn }}
+    >
       {children}
     </UserContext.Provider>
   );

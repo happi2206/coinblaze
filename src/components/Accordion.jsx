@@ -10,7 +10,7 @@ const Accordion = ({ title, accordionContent }) => {
         onClick={() => {
           setContent(!content);
         }}
-        className="flex items-center justify-between border-b"
+        className="flex items-center justify-between border-b border-black dark:border-white"
       >
         <h4 className="py-3 text-xs font-semibold"> {title}</h4>
         <Icon
@@ -24,7 +24,7 @@ const Accordion = ({ title, accordionContent }) => {
       </div>
 
       {content && (
-        <ul className="mt-2">
+        <ul className="mt-2 transition duration-300">
           {accordionContent.map((item, index) => (
             <Link to={item.link} key={index}>
               <li className="py-2 pl-3 text-xs">{item.title}</li>

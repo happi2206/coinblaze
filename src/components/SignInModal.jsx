@@ -9,13 +9,22 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { signUp } = UserAuth();
+  const { signIn, googleSignIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(email, password);
-      navigate('/account');
+      await signIn(email, password);
+      navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+  const signInWithGoogle = async () => {
+    try {
+      closeModal();
+      await googleSignIn();
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }
@@ -56,14 +65,14 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
 
           <div className="pt-4">
             <Button authbtn type="submit">
-              Sign Up
+              Sign In
             </Button>
           </div>
         </form>
 
         <p className="py-5 text-center">or</p>
         <div className="pb-5">
-          <Button authbtn outlineprimary onClick={() => console.log('object')}>
+          <Button authbtn outlineprimary onClick={signInWithGoogle}>
             <span className="flex items-center justify-center">
               <Icon icon="flat-color-icons:google" width={13} />
               <span className="ml-3"> Continue with Google</span>
@@ -79,7 +88,7 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
               closeOtherModal();
             }}
           >
-            Sign up
+            Sign Up
           </span>
         </p>
       </div>

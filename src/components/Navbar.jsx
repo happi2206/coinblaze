@@ -142,26 +142,36 @@ const Navbar = () => {
         </Link>
 
         {user?.email ? (
-          <div>
-            <Link to="/account" className="p-4">
-              Account
+          <>
+            <div className="hidden md:block">
+              <Link to="/account" className="p-4 text-xs font-medium">
+                Account
+              </Link>
+              <span
+                className="px-4 py-1.5 text-xs bg-button rounded cursor-pointer"
+                onClick={handleSignOut}
+              >
+                Sign out
+              </span>
+            </div>
+            <Link className="block cursor-pointer md:hidden" to="/account">
+              <Icon icon="mdi:account" width={22} />
             </Link>
-            <button onClick={handleSignOut}>Sign out</button>
-          </div>
+          </>
         ) : (
           <div className="hidden md:block">
-            <Link
-              to="/auth/signin"
-              className="p-4 text-xs font-medium hover:text-accent"
+            <span
+              onClick={() => setSignInModalOpen(true)}
+              className="p-4 text-xs font-medium cursor-pointer hover:text-accent"
             >
               Sign In
-            </Link>
-            <Link
-              to="/auth/signup"
-              className="px-5 py-2 ml-2 text-xs font-medium text-white rounded-lg shadow-lg bg-button text-btnText hover:shadow-2xl hover:opacity-75"
+            </span>
+            <span
+              onClick={() => setSignUpModalOpen(true)}
+              className="px-5 py-2 ml-2 text-xs font-medium text-white rounded-lg shadow-lg cursor-pointer bg-button text-btnText hover:shadow-2xl hover:opacity-75"
             >
               Sign Up
-            </Link>
+            </span>
           </div>
         )}
       </div>
@@ -169,8 +179,8 @@ const Navbar = () => {
       <div
         className={
           nav
-            ? 'md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10'
-            : 'fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-300'
+            ? 'md:hidden  fixed left-0 top-20 flex flex-col items-center  w-full h-[90%] bg-primary ease-in duration-300 z-10'
+            : 'fixed left-[-100%] top-20 h-[90%] flex flex-col items-center  ease-in duration-300'
         }
       >
         <div className="w-full p-4 space-y-3">
@@ -201,6 +211,39 @@ const Navbar = () => {
               { title: 'NFT Related Coins', link: 'nft' },
             ]}
           />
+
+          <div className="flex justify-end pt-10">
+            <span
+              className="text-black px-4 py-1.5 text-xs cursor-pointer bg-button rounded "
+              onClick={handleSignOut}
+            >
+              Sign out
+            </span>
+          </div>
+        </div>
+
+        <div className="flex justify-between py-4 space-x-6 text-accent">
+          <a
+            href="https://twitter.com/afrohappi"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon icon="akar-icons:twitter-fill" />
+          </a>
+          <a
+            href="https://github.com/happi2206"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon icon="akar-icons:github-fill" />
+          </a>
+          <a
+            href="https://www.instagram.com/growwithhappi/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon icon="akar-icons:instagram-fill" />
+          </a>
         </div>
       </div>
 
@@ -208,12 +251,15 @@ const Navbar = () => {
         <div className="block md:hidden">
           <ToggleTheme />
         </div>
-        <div
-          className="block cursor-pointer md:hidden"
-          onClick={() => setSignInModalOpen(true)}
-        >
-          <Icon icon="mdi:account" width={22} />
-        </div>
+
+        {!user?.email && (
+          <div
+            className="block cursor-pointer md:hidden"
+            onClick={() => setSignInModalOpen(true)}
+          >
+            <Icon icon="mdi:account" width={22} />
+          </div>
+        )}
       </div>
       <SignInModal
         modalOpen={signInModalOpen}

@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { NavLink } from 'react-router-dom';
+import CoinLinks from '../components/CoinLinks';
 const CoinPage = () => {
   const [coin, setCoin] = useState({});
   const params = useParams();
@@ -20,9 +21,10 @@ const CoinPage = () => {
       setCoin(response.data);
     });
   }, [url]);
+
   const saveCoin = async () => {
     if (user?.email) {
-      setSavedCoin(true);
+      setSavedCoin(!savedCoin);
       await updateDoc(coinPath, {
         watchList: arrayUnion({
           id: coin.id,
@@ -39,7 +41,6 @@ const CoinPage = () => {
 
   return (
     <div className="container py-8 ">
-      <div className="text-xs">{JSON.stringify(coin.links)}</div>
       <NavLink
         to="/"
         className="flex items-center text-xs cursor-pointer text-accent"
@@ -48,8 +49,8 @@ const CoinPage = () => {
         Back
       </NavLink>
 
-      <div className="flex flex-col items-center justify-between md:flex-row">
-        <div className="flex items-center py-8 my-4">
+      <div className="flex flex-col md:items-center md:justify-between md:flex-row">
+        <div className="flex items-center my-4 md:py-8">
           <img
             className="object-contain mr-8 w-14"
             src={coin.image?.large}
@@ -62,33 +63,55 @@ const CoinPage = () => {
             </p>
           </div>
         </div>
-        <div
-          className="py-8 my-4 space-x-2 cursor-pointer md:w-3/6"
-          onClick={saveCoin}
-        >
-          <div className="flex items-center justify-end">
-            <Icon icon="ant-design:star-outlined" width={20} />
-            <p className="text-lg font-semibold">Add to watch list</p>
+        <div className="my-4 space-x-2 md:py-8 md:w-3/6">
+          <div
+            className="flex items-center justify-end cursor-pointer "
+            onClick={saveCoin}
+          >
+            {savedCoin ? (
+              <Icon icon="ant-design:star-filled" width={20} />
+            ) : (
+              <Icon icon="ant-design:star-outlined" width={20} />
+            )}
+
+            <p className="text-sm font-semibold">Add to watch list</p>
           </div>
-          <div className="md:pt-20">
-            <p className="text-lg font-semibold text-gray-500">Info</p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Repudiandae labore cumque culpa ut ratione temporibus deleniti fuga
-            corrupti quam inventore reiciendis, totam est porro quaerat veniam
-            possimus iure, et nemo?
+
+          <div className="md:pt-10">
+            <p className="py-4 text-sm font-semibold text-primary">
+              Social Links
+            </p>
+
+            <div className="space-y-2">
+              <CoinLinks
+                title="Website"
+                link={coin.links?.homepage}
+                icon="pepicons:internet"
+              />
+              <CoinLinks
+                title="Reddit"
+                link={coin.links?.subreddit_url}
+                icon="akar-icons:reddit-fill"
+              />
+              <CoinLinks
+                title="Discord"
+                link={coin.links?.chat_url}
+                icon="akar-icons:discord-fill"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="">
         <div>
           <div className="flex justify-between">
             {coin.market_data?.current_price && (
-              <p className="text-xl font-bold">
+              <p className="text-base font-bold md:text-xl">
                 ${coin.market_data.current_price.usd.toLocaleString()}
               </p>
             )}
-            <p>7 Day</p>
+            <p className="text-xs md:text-sm">7 Days</p>
           </div>
           <div>
             <Sparklines data={coin.market_data?.sparkline_7d.price}>
@@ -225,18 +248,20 @@ const CoinPage = () => {
             <FaReddit />
             <FaGithub /> */}
         </div>
-      </div>
-      {/* Description */}
-      <div className="py-4">
-        <p className="text-lg font-bold">About {coin.name}</p>
-        <p
-          className="text-xs md:text-sm"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              coin.description ? coin.description.en : ''
-            ),
-          }}
-        ></p>
+        <p className="mt-10 text-sm font-semibold text-gray-500">
+          About {coin.name}
+        </p>
+        {/* Description */}
+        <div className="py-4">
+          <p
+            className="text-xs md:text-sm"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(
+                coin.description ? coin.description.en : ''
+              ),
+            }}
+          ></p>
+        </div>
       </div>
     </div>
   );

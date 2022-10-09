@@ -39,22 +39,23 @@ const SavedCoin = () => {
             <tr className="border-b">
               <th className="px-4">Rank #</th>
               <th className="text-left">Coin</th>
-              <th className="text-left">Remove</th>
+
+              <th className="text-left">Delete coin</th>
             </tr>
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <tr key={coin.id} className="h-[60px] overflow-hidden">
-                <td>
-                  {' '}
-                  <td>{coin?.rank}</td>
-                </td>
+              <tr key={coin.id} className="h-[80px] border-b overflow-hidden">
+                <td className="text-sm">{coin?.rank}</td>
+
                 <td>
                   <Link to={`/coin/${coin.id}`}>
                     <div className="flex items-center">
                       <img src={coin?.image} className="w-8 mr-4" alt="/" />
                       <div>
-                        <p className="hidden sm:table-cell">{coin?.name}</p>
+                        <p className="hidden text-sm sm:table-cell">
+                          {coin?.name}
+                        </p>
                         <p className="text-sm text-left text-gray-500">
                           {coin?.symbol.toUpperCase()}
                         </p>
@@ -63,7 +64,7 @@ const SavedCoin = () => {
                   </Link>
                 </td>
 
-                <td className="pl-8 ">
+                <td className="pl-8">
                   <span
                     onClick={() => deleteCoin(coin.id)}
                     className="cursor-pointer"
