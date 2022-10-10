@@ -8,22 +8,29 @@ import Input from './Input';
 const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordLengthError, setPasswordLengthError] = useState(false);
   const navigate = useNavigate();
   const { signUp, googleSignIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await signUp(email, password);
-      navigate('/account');
-    } catch (e) {
-      console.log(e.message);
+    if (password.length < 7) {
+      setPasswordLengthError(true);
+    } else {
+      setPasswordLengthError(false);
+      try {
+        await signUp(email, password);
+        closeModal();
+        navigate('/');
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   };
   const signInWithGoogle = async () => {
     try {
-      closeModal();
       await googleSignIn();
+      closeModal();
       navigate('/');
     } catch (e) {
       console.log(e.message);
@@ -73,6 +80,12 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            {passwordLengthError && (
+              <p className="pt-4 text-xs text-red-400">
+                Password should not be less than six characters
+              </p>
+            )}
           </div>
 
           <div className="pt-4">

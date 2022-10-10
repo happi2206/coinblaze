@@ -25,9 +25,9 @@ const Account = () => {
           </div>
         </div>
 
-        <div className="flex items-center py-8 my-12 justfiy-between rounded-div">
+        <div className="flex items-center py-8 md:my-12 justfiy-between ">
           <div className="w-full min-h-[300px]">
-            <h1 className="py-4 font-bold md:text-xl">My Portfolio</h1>
+            <h1 className="py-4 text-sm font-bold md:text-xl">My Portfolio</h1>
             <SavedCoin />
           </div>
         </div>

@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 const TrendingCoins = () => {
   const [trending, setTrending] = useState([]);
-
-  const url = `/search/trending`;
-
+  const getTrending = async () => {
+    const { data } = await axios.get(`/search/trending`);
+    setTrending(data.coins);
+  };
   useEffect(() => {
-    axios.get(url).then((response) => {
-      setTrending(response.data.coins);
-    });
+    getTrending();
   }, []);
 
   return (
-    <div className="py-8 my-12 rounded-div text-primary">
-      <h1 className="py-4 text-2xl font-bold">Trending Coins</h1>
+    <div className="py-8 text-primary">
+      <h1 className="py-4 text-base font-bold md:text-xl">Trending Coins</h1>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {trending.map((coin, idx) => (
+        {trending.map((coin, id) => (
           <div
-            key={idx}
-            className="flex justify-between p-4 duration-300 ease-in-out rounded-div hover:scale-105"
+            key={id}
+            className="flex justify-between p-4 duration-300 ease-in-out hover:scale-105"
           >
-            <div className="flex items-center justify-between w-full">
+            <Link
+              to={`/coin/${coin.item.id}`}
+              className="flex items-center justify-between w-full"
+            >
               <div className="flex">
                 <img
                   className="mr-4 rounded-full"
@@ -29,8 +31,8 @@ const TrendingCoins = () => {
                   alt="/"
                 />
                 <div>
-                  <p className="font-bold">{coin.item.name}</p>
-                  <p>{coin.item.symbol}</p>
+                  <p className="text-sm font-bold">{coin.item.name}</p>
+                  <p className="text-xs">{coin.item.symbol}</p>
                 </div>
               </div>
               <div className="flex items-center">
@@ -41,7 +43,7 @@ const TrendingCoins = () => {
                 />
                 <p>{coin.item.price_btc.toFixed(7)}</p>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

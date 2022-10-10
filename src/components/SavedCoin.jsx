@@ -29,34 +29,41 @@ const SavedCoin = () => {
   return (
     <div>
       {coins?.length === 0 ? (
-        <p>
+        <p className="text-sm">
           You don't have any coins saved. Please save a coin to add it to your
-          watch list. <Link to="/">Click here to search coins.</Link>
+          watch list.{' '}
+          <Link to="/" className="text-accent">
+            Click here to search coins.
+          </Link>
         </p>
       ) : (
         <table className="w-full text-center border-collapse">
           <thead>
             <tr className="border-b">
-              <th className="px-4">Rank #</th>
-              <th className="text-left">Coin</th>
+              <th className="px-4 text-xs md:text-sm">Rank #</th>
+              <th className="text-xs text-left md:text-sm">Coin</th>
 
-              <th className="text-left">Delete coin</th>
+              <th className="text-xs text-left md:text-sm">Delete coin</th>
             </tr>
           </thead>
           <tbody>
             {coins.map((coin) => (
               <tr key={coin.id} className="h-[80px] border-b overflow-hidden">
-                <td className="text-sm">{coin?.rank}</td>
+                <td className="text-xs md:text-sm">{coin?.rank}</td>
 
                 <td>
                   <Link to={`/coin/${coin.id}`}>
                     <div className="flex items-center">
-                      <img src={coin?.image} className="w-8 mr-4" alt="/" />
+                      <img
+                        src={coin?.image}
+                        className="w-4 mr-4 md:w-8"
+                        alt="/"
+                      />
                       <div>
-                        <p className="hidden text-sm sm:table-cell">
+                        <p className="hidden text-xs md:text-sm sm:table-cell">
                           {coin?.name}
                         </p>
-                        <p className="text-sm text-left text-gray-500">
+                        <p className="text-xs text-left text-gray-500 md:text-sm">
                           {coin?.symbol.toUpperCase()}
                         </p>
                       </div>

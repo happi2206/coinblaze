@@ -1,7 +1,13 @@
 import React from 'react';
-
+import Trending from '../components/Trending';
 const TrendingCoins = () => {
-  return <div>TrendingCoins</div>;
+  return (
+    <div>
+      <div className="container">
+        <Trending />
+      </div>
+    </div>
+  );
 };
 
 export default TrendingCoins;

@@ -7,49 +7,72 @@ import routes from './router/routes';
 import NotFound from './views/NotFound';
 import axios from 'axios';
 import './axios/global';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCoins } from '../src/features/coins/coinSlice';
-import { useSelector } from 'react-redux';
 import Footer from './components/Footer';
 import { AuthContextProvider } from './context/AuthContext';
 import { useLocation } from 'react-router-dom';
+import LoadingScreen from './components/LoadingScreen';
 function App() {
   const dispatch = useDispatch();
   const url = `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`;
   const location = useLocation();
-  const getCoins = useSelector((state) => {
-    return state.coins.coins;
-  });
 
+  const [showLoadingRequest, setShowLoadingRequest] = useState(false);
+  const fetchCoins = async () => {
+    const response = await axios.get(url);
+    dispatch(setCoins(response.data));
+  };
   useEffect(() => {
-    axios.get(url).then((response) => {
-      dispatch(setCoins(response.data));
-    });
+    fetchCoins();
   }, []);
 
+  axios.interceptors.request.use(
+    function (config) {
+      setShowLoadingRequest(true);
+      return config;
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
+  axios.interceptors.response.use(
+    function (response) {
+      setShowLoadingRequest(false);
+      return response;
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
+
   return (
-    <ThemeProvider>
-      <AuthContextProvider>
-        <Navbar />
+    <>
+      {showLoadingRequest && <LoadingScreen />}
 
-        {location.pathname !== '/portfolio' && <Tabs />}
+      <ThemeProvider>
+        <AuthContextProvider>
+          <Navbar />
 
-        <Routes>
-          {routes.map((route, index) => {
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={route.element}
-              ></Route>
-            );
-          })}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </AuthContextProvider>
-    </ThemeProvider>
+          {location.pathname !== '/portfolio' && <Tabs />}
+
+          <Routes>
+            {routes.map((route, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={route.element}
+                ></Route>
+              );
+            })}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </AuthContextProvider>
+      </ThemeProvider>
+    </>
   );
 }
 

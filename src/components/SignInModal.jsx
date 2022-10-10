@@ -15,6 +15,7 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
     e.preventDefault();
     try {
       await signIn(email, password);
+      closeModal();
       navigate('/');
     } catch (e) {
       console.log(e.message);
@@ -22,8 +23,8 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
   };
   const signInWithGoogle = async () => {
     try {
-      closeModal();
       await googleSignIn();
+      closeModal();
       navigate('/');
     } catch (e) {
       console.log(e.message);

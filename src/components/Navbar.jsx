@@ -50,7 +50,13 @@ const Navbar = () => {
       </Link>
       <div className="items-center justify-between hidden w-2/6 md:flex">
         <div className="relative">
-          <div onMouseOver={() => setCryptocurrencies(true)}>
+          <div
+            onMouseOver={() => {
+              setExchanges(false);
+              setNfts(false);
+              setCryptocurrencies(true);
+            }}
+          >
             <h1 className="text-xs font-medium cursor-pointer lg:text-sm hover:text-accent">
               Cryptocurrencies
             </h1>
@@ -62,26 +68,32 @@ const Navbar = () => {
             >
               <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  Trending Coins
+                  <Link to="trending">Trending Coins</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  New Cryptocurrencies
+                  <Link to="new-coins"> New Cryptocurrencies</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  Global Charts
+                  <Link to="global-charts"> Global Charts </Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  All Coins
+                  <Link to="/">All Coins</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  By Market Cap
+                  <Link to="market-cap">By Market Cap</Link>
                 </li>
               </ul>
             </div>
           )}
         </div>
         <div className="relative">
-          <div onMouseOver={() => setExchanges(true)}>
+          <div
+            onMouseOver={() => {
+              setCryptocurrencies(false);
+              setNfts(false);
+              setExchanges(true);
+            }}
+          >
             <h1 className="text-xs font-medium cursor-pointer lg:text-sm hover:text-accent">
               Exchanges
             </h1>
@@ -93,20 +105,26 @@ const Navbar = () => {
             >
               <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  Crypto Exhanges
+                  <Link to="market-cap"> Crypto Exhanges</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  Decentralized Exchanges
+                  <Link to="market-cap">Decentralized Exchanges</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  Derivatives
+                  <Link to="market-cap"> Derivatives</Link>
                 </li>
               </ul>
             </div>
           )}
         </div>
         <div className="relative">
-          <div onMouseOver={() => setNfts(true)}>
+          <div
+            onMouseOver={() => {
+              setCryptocurrencies(false);
+              setExchanges(false);
+              setNfts(true);
+            }}
+          >
             <h1 className="text-xs font-medium cursor-pointer lg:text-sm hover:text-accent">
               NFT
             </h1>
@@ -118,10 +136,10 @@ const Navbar = () => {
             >
               <ul className="py-3 text-xs border border-gray-500 rounded dark:border-none dark:rounded-0">
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  NFT Floor Price
+                  <Link to="/nft"> NFT Floor Price</Link>
                 </li>
                 <li className="px-5 py-3 font-semibold cursor-pointer hover:bg-green-100 dark:hover:bg-gray-700 hover:text-accent">
-                  NFT Related Coins
+                  <Link to="/nft"> NFT Related Coins</Link>
                 </li>
               </ul>
             </div>

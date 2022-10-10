@@ -7,10 +7,11 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { Icon } from '@iconify/react';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CoinLinks from '../components/CoinLinks';
 const CoinPage = () => {
   const [coin, setCoin] = useState({});
+  const navigate = useNavigate();
   const params = useParams();
   const url = `/coins/${params.id}?localization=false&sparkline=true`;
   const [savedCoin, setSavedCoin] = useState(false);
@@ -41,13 +42,13 @@ const CoinPage = () => {
 
   return (
     <div className="container py-8 ">
-      <NavLink
-        to="/"
+      <span
+        onClick={() => navigate(-1)}
         className="flex items-center text-xs cursor-pointer text-accent"
       >
         <Icon icon="ep:arrow-left-bold" width={12} />
         Back
-      </NavLink>
+      </span>
 
       <div className="flex flex-col md:items-center md:justify-between md:flex-row">
         <div className="flex items-center my-4 md:py-8">
