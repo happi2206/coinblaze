@@ -14,25 +14,29 @@ const Nft = () => {
   return (
     <div className="container py-8 text-primary">
       <h1 className="py-4 text-base font-bold md:text-xl">Trending NFTs</h1>
-      <table className="w-full text-center border-collapse">
+      <table className="overflow-auto text-center border-collapse ">
         <thead>
           <tr className="border-b">
-            <th className="px-4 text-left">#</th>
-            <th className="text-left">Name</th>
-            <th className="text-left">Asset Platform</th>
-            <th className="text-left">Contract Address</th>
+            <th className="px-4 text-xs text-left md:text-sm">#</th>
+            <th className="text-xs text-left md:text-sm">Name</th>
+            <th className="text-xs text-left md:text-sm">Asset Platform</th>
+            <th className="hidden text-xs text-left md:text-sm sm:block">
+              Contract Address
+            </th>
           </tr>
         </thead>
         <tbody>
           {nfts.map((nft, index) => (
             <tr key={nft.contract_address} className="s">
-              <td className="py-3 text-sm text-left">{index + 1}</td>
-              <td className="py-3 text-sm text-left">{nft.name}</td>
+              <td className="py-3 text-xs text-left sm:text-sm">{index + 1}</td>
+              <td className="py-3 text-xs text-left sm:text-sm">{nft.name}</td>
 
-              <td className="py-3 text-sm text-left">
+              <td className="py-3 text-xs text-left sm:text-sm">
                 {nft.asset_platform_id}
               </td>
-              <td className="py-3 text-sm text-left">{nft.contract_address}</td>
+              <td className="hidden py-3 text-xs text-left sm:text-sm sm:block">
+                {nft.contract_address}
+              </td>
             </tr>
           ))}
         </tbody>
