@@ -6,9 +6,11 @@ import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import SignInModal from './SignInModal';
+import SignUpModal from './SignUpModal';
 const CoinRow = ({ coin }) => {
   const [savedCoin, setSavedCoin] = useState(false);
   const [signInModalOpen, setSignInModalOpen] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const { user } = UserAuth();
   const coinPath = doc(db, 'users', `${user?.email}`);
   const saveCoin = async () => {
@@ -75,10 +77,23 @@ const CoinRow = ({ coin }) => {
           <SparklinesLine color="#8dc547" />
         </Sparklines>
       </td>
+
+      <SignUpModal
+        modalOpen={signUpModalOpen}
+        closeModal={() => setSignUpModalOpen(false)}
+        closeOtherModal={() => {
+          setSignUpModalOpen(false);
+          setSignInModalOpen(true);
+        }}
+      />
       <SignInModal
         modalOpen={signInModalOpen}
         closeModal={() => {
           setSignInModalOpen(false);
+        }}
+        closeOtherModal={() => {
+          setSignInModalOpen(false);
+          setSignUpModalOpen(true);
         }}
       />
     </tr>

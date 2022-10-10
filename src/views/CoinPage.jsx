@@ -9,12 +9,16 @@ import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
 import CoinLinks from '../components/CoinLinks';
+import SignInModal from '../components/SignInModal';
+import SignUpModal from '../components/SignUpModal';
 const CoinPage = () => {
   const [coin, setCoin] = useState({});
   const navigate = useNavigate();
   const params = useParams();
   const url = `/coins/${params.id}?localization=false&sparkline=true`;
   const [savedCoin, setSavedCoin] = useState(false);
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
   const { user } = UserAuth();
   const coinPath = doc(db, 'users', `${user?.email}`);
   useEffect(() => {
@@ -36,7 +40,7 @@ const CoinPage = () => {
         }),
       });
     } else {
-      alert('Please sign in to save a coin to your watch list');
+      setSignInModalOpen(true);
     }
   };
 
@@ -264,6 +268,24 @@ const CoinPage = () => {
           ></p>
         </div>
       </div>
+      <SignUpModal
+        modalOpen={signUpModalOpen}
+        closeModal={() => setSignUpModalOpen(false)}
+        closeOtherModal={() => {
+          setSignUpModalOpen(false);
+          setSignInModalOpen(true);
+        }}
+      />
+      <SignInModal
+        modalOpen={signInModalOpen}
+        closeModal={() => {
+          setSignInModalOpen(false);
+        }}
+        closeOtherModal={() => {
+          setSignInModalOpen(false);
+          setSignUpModalOpen(true);
+        }}
+      />
     </div>
   );
 };
