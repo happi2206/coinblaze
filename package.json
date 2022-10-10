@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "axios": "^1.1.2",
     "dompurify": "^2.4.0",
     "firebase": "^9.9.4",
     "iconify": "^1.4.0",
