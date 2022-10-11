@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Spinner from './Spinner';
 const Button = ({
   onClick,
   disabled,
@@ -26,7 +26,10 @@ const Button = ({
       type={type}
       onClick={onClick}
     >
-      {children}
+      <span className="flex items-center justify-center">
+        {isSubmitting && <Spinner />}
+        {children}
+      </span>
     </button>
   );
 };

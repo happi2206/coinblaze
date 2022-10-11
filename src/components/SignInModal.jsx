@@ -8,17 +8,23 @@ import Input from './Input';
 const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [submitting, isSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { signIn, googleSignIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    isSubmitting(true);
     try {
       await signIn(email, password);
+      isSubmitting(false);
       closeModal();
       navigate('/');
     } catch (e) {
-      console.log(e.message);
+      setError(e.message);
+      console.error(e.message);
+      isSubmitting(false);
     }
   };
   const signInWithGoogle = async () => {
@@ -27,7 +33,8 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
       closeModal();
       navigate('/');
     } catch (e) {
-      console.log(e.message);
+      setError(e.message);
+      console.error(e.message);
     }
   };
 
@@ -64,8 +71,10 @@ const SignIn = ({ modalOpen, closeModal, closeOtherModal }) => {
             />
           </div>
 
+          {error && <p className="pt-4 text-xs text-red-400">{error}</p>}
+
           <div className="pt-4">
-            <Button authbtn type="submit">
+            <Button authbtn type="submit" isSubmitting={submitting}>
               Sign In
             </Button>
           </div>

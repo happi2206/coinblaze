@@ -9,6 +9,8 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordLengthError, setPasswordLengthError] = useState(false);
+  const [error, setError] = useState('');
+  const [submitting, isSubmitting] = useState(false);
   const navigate = useNavigate();
   const { signUp, googleSignIn } = UserAuth();
 
@@ -18,12 +20,16 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
       setPasswordLengthError(true);
     } else {
       setPasswordLengthError(false);
+      isSubmitting(true);
       try {
         await signUp(email, password);
+        isSubmitting(false);
         closeModal();
         navigate('/');
       } catch (e) {
-        console.log(e.message);
+        console.error(e.message);
+        setError(e.message);
+        isSubmitting(false);
       }
     }
   };
@@ -86,10 +92,12 @@ const Signup = ({ modalOpen, closeModal, closeOtherModal }) => {
                 Password should not be less than six characters
               </p>
             )}
+
+            {error && <p className="pt-4 text-xs text-red-400">{error}</p>}
           </div>
 
           <div className="pt-4">
-            <Button authbtn type="submit">
+            <Button authbtn type="submit" isSubmitting={submitting}>
               Sign Up
             </Button>
           </div>
