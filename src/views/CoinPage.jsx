@@ -113,7 +113,7 @@ const CoinPage = () => {
           <div className="flex justify-between">
             {coin.market_data?.current_price && (
               <p className="text-base font-bold md:text-xl">
-                ${coin.market_data.current_price.usd.toLocaleString()}
+                ${coin.market_data.current_pric?.usd.toLocaleString()}
               </p>
             )}
             <p className="text-xs md:text-sm">7 Days</p>
@@ -127,13 +127,13 @@ const CoinPage = () => {
             <div>
               <p className="text-xs text-gray-500 md:text-sm">Market Cap</p>
               {coin.market_data?.market_cap && (
-                <p>${coin.market_data.market_cap.usd.toLocaleString()}</p>
+                <p>${coin.market_data.market_cap.usd?.toLocaleString()}</p>
               )}
             </div>
             <div>
               <p className="text-xs text-gray-500 md:text-sm">Volume (24h)</p>
               {coin.market_data?.market_cap && (
-                <p>${coin.market_data.total_volume.usd.toLocaleString()}</p>
+                <p>${coin.market_data.total_volume?.usd.toLocaleString()}</p>
               )}
             </div>
           </div>
@@ -142,13 +142,13 @@ const CoinPage = () => {
             <div>
               <p className="text-xs text-gray-500 md:text-sm">24h High</p>
               {coin.market_data?.high_24h && (
-                <p>${coin.market_data.high_24h.usd.toLocaleString()}</p>
+                <p>${coin.market_data.high_24h?.usd.toLocaleString()}</p>
               )}
             </div>
             <div>
               <p className="text-xs text-gray-500 md:text-sm">24h Low</p>
               {coin.market_data?.low_24h && (
-                <p>${coin.market_data.low_24h.usd.toLocaleString()}</p>
+                <p>${coin.market_data.low_24h?.usd.toLocaleString()}</p>
               )}
             </div>
           </div>
@@ -170,7 +170,7 @@ const CoinPage = () => {
           </div>
           <div>
             <p className="text-xs text-gray-500 md:text-sm">Trust Score</p>
-            {coin.tickers && <p>{coin.liquidity_score.toFixed(2)}</p>}
+            {coin.tickers && <p>{coin.liquidity_score?.toFixed(2)}</p>}
           </div>
         </div>
 
@@ -180,7 +180,9 @@ const CoinPage = () => {
               Price Change (24h)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_24h.toFixed(2)}%</p>
+              <p>
+                {coin.market_data?.price_change_percentage_24h?.toFixed(2)}%
+              </p>
             )}
           </div>
           <div>
@@ -188,7 +190,7 @@ const CoinPage = () => {
               Price Change (7d)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_7d.toFixed(2)}%</p>
+              <p>{coin.market_data?.price_change_percentage_7d?.toFixed(2)}%</p>
             )}
           </div>
           <div>
@@ -196,7 +198,9 @@ const CoinPage = () => {
               Price Change (14d)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_14d.toFixed(2)}%</p>
+              <p>
+                {coin.market_data?.price_change_percentage_14d?.toFixed(2)}%
+              </p>
             )}
           </div>
         </div>
@@ -206,7 +210,9 @@ const CoinPage = () => {
               Price Change (30d)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_30d.toFixed(2)}%</p>
+              <p>
+                {coin.market_data?.price_change_percentage_30d?.toFixed(2)}%
+              </p>
             )}
           </div>
           <div>
@@ -214,7 +220,9 @@ const CoinPage = () => {
               Price Change (60d)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_60d.toFixed(2)}%</p>
+              <p>
+                {coin.market_data?.price_change_percentage_60d?.toFixed(2)}%
+              </p>
             )}
           </div>
           <div>
@@ -222,7 +230,7 @@ const CoinPage = () => {
               Price Change (1y)
             </p>
             {coin.market_data && (
-              <p>{coin.market_data.price_change_percentage_1y.toFixed(2)}%</p>
+              <p>{coin.market_data?.price_change_percentage_1y?.toFixed(2)}%</p>
             )}
           </div>
         </div>

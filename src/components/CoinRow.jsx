@@ -58,11 +58,11 @@ const CoinRow = ({ coin }) => {
       <td className="text-sm">
         {coin.price_change_percentage_24h > 0 ? (
           <p className="text-sm text-green-600">
-            {coin.price_change_percentage_24h.toFixed(2)}%
+            {coin.price_change_percentage_24h?.toFixed(2)}%
           </p>
         ) : (
           <p className="text-sm text-red-600">
-            {coin.price_change_percentage_24h.toFixed(2)}%
+            {coin.price_change_percentage_24h?.toFixed(2)}%
           </p>
         )}
       </td>
